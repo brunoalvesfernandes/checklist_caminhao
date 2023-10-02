@@ -1,0 +1,126 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.checklist-container {
+    width: 80%;
+    max-width: 500px; /* Defina uma largura máxima para evitar que a lista fique muito larga em telas grandes */
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    margin: auto;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+}
+
+.checklist-container img {
+    width: 100%;
+}
+
+h1 {
+    color: #007bff;
+    font-size: 24px;
+}
+
+.checklist ul {
+    list-style: none;
+}
+
+.checklist li {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.checklist input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#motivos {
+    display: none;
+}
+
+.checklist {
+    position:absolute;
+    padding: 0;
+    margin: auto 0;
+    width: 100%;
+    height: 100%;
+    max-height: 650px;
+    top: 0;
+    background-color: #fff;
+    z-index: 2;
+    justify-content: center;
+    align-content: center;
+}
+
+.checklist ul {
+    margin: 0;
+    padding: 0;
+}
+
+.checklist form {
+    margin-top: 200px;
+    text-align: center;
+    margin-left: 0;
+    align-items: center;
+    justify-items: center;
+}
+
+.danger {
+    color: red;
+}
+
+.no-danger {
+    color: rgb(255, 255, 0);
+}
+
+.no-grave {
+    color: rgb(0, 255, 0);
+}
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Adicione uma transição suave */
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor de fundo quando hover */
+    color: #fff; /* Cor do texto quando hover */
+}
+
+textarea {
+    width: 90%; /* Define a largura para ocupar todo o espaço disponível */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Estilo da borda */
+    border-radius: 3px; /* Borda arredondada */
+    font-size: 16px; /* Tamanho da fonte */
+    resize: vertical; /* Permite redimensionar verticalmente (pode ser "none" para desabilitar) */
+}
+
+/* Personalize a aparência do <textarea> quando em foco */
+textarea:focus {
+    border-color: #007bff; /* Cor da borda quando em foco */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra quando em foco */
+}
+
+@media screen and (max-width:800px) {
+    .checklist-container{
+        position: absolute;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

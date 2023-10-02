@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Caminhão</title>
+    <link rel="stylesheet" href="css/checklist.css">
+</head>
+
+<body>
+    <div class="checklist-container">
+        <h1>Checklist de Caminhão</h1>
+        <img src="images/caminhao-farol.png" alt="Caminhão com farol">
+        <h2>Verifique o farol:</h2>
+        <div class="buttons">
+            <button id="yes">Sim</button>
+            <button id="no">Não</button>
+        </div>
+        <div class='checklist' id="motivos">
+            <ul>
+                <h1>QUAL O PROBLEMA CARAIO ?</h1>
+                <form>
+                    <li>
+                        <textarea name="problema" id="problema" cols="30" rows="10"
+                            placeholder="Qual o problema ?"></textarea>
+                    </li>
+                    <li> <button id="enviar-problemas">Enviar</button></li>
+                </form>
+                <li> 
+                    <button id="captureButton">Tirar Foto</button>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <img id="capturedPhoto" src="" alt="Foto Capturada">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/picture.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
