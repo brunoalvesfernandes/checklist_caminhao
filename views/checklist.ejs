@@ -25,18 +25,19 @@
         <div class='checklist' id="motivos">
             <ul>
                 <h1>QUAL O PROBLEMA CARAIO ?</h1>
-                <form>
+                <form action="javascript:void(0);">
                     <li>
                         <textarea name="problema" id="problema" cols="30" rows="10"
                             placeholder="Qual o problema ?"></textarea>
                     </li>
-                    <li> <button id="enviar-problemas">Enviar</button></li>
-                </form>
+                    
                 <li> 
                     <button id="captureButton">Tirar Foto</button>
                     <canvas id="canvas" style="display: none;"></canvas>
-                    <img id="capturedPhoto" src="" alt="Foto Capturada">
+                    <img id="capturedPhoto" style="display: none;" src="" alt="Foto Capturada">
                 </li>
+                <li> <button id="enviar-problemas">Enviar</button></li>
+                </form>
             </ul>
         </div>
     </div>

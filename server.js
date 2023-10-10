@@ -1,6 +1,6 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 1050;
 const authRoute = require('./routes/login');
 const checklistRoute = require('./routes/checklist');
 
@@ -18,6 +18,6 @@ app.use('/login', authRoute);
 
 app.use('/checklist', checklistRoute);
 
-app.listen(port, () => {
-    console.log(`Servidor em execução em http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor em execução em http://localhost:${process.env.PORT}`);
 });
