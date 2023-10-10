@@ -6,8 +6,8 @@ $('#no').click(()=>{
 });
 
 function mostrarMotivos() {
-    const motivosDiv = document.getElementById('motivos');
-    motivosDiv.style.display = 'block';
+    $('#motivos').css('display','block');
+    $('.checklist-container').css('display','none');
 }
 function nextLevel() {
 
