@@ -13,44 +13,44 @@ const con = mysql.createConnection({
 con.connect(function(err) {
     if (err){
         console.log('\x1b[31m%s\x1b[0m', "Erro ao se conectar com o banco de dados!");
-    }
-    // Código para criar a tabela 'usuarios' se não existir
-    const createTableQuery = `CREATE TABLE IF NOT EXISTS users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        login VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        truck VARCHAR(255) NOT NULL,
-        admin INT NOT NULL DEFAULT 0
-    )`;
+    }else {
+        // Código para criar a tabela 'usuarios' se não existir
+        const createTableQuery = `CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            login VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            truck VARCHAR(255) NOT NULL,
+            admin INT NOT NULL DEFAULT 0
+        )`;
 
-    const tableCheckQuery = `
-        SELECT COUNT(*)
-        FROM information_schema.tables
-        WHERE table_schema = ? AND table_name = 'users'
-    `;
+        const tableCheckQuery = `
+            SELECT COUNT(*)
+            FROM information_schema.tables
+            WHERE table_schema = ? AND table_name = 'users'
+        `;
 
-    con.query(tableCheckQuery, [process.env.DATABASE], function(err, result) {
-        if (err) {
-            console.error("Erro ao verificar a existência da tabela 'users':", err);
-        } else {
-            if (result[0]['COUNT(*)'] === 0) {
-                // A tabela 'users' não existe, então a criamos
-                con.query(createTableQuery, function(err, createResult) {
-                    if (err) {
-                        console.error("Erro ao criar a tabela 'users':", err);
-                    } else {
-                        console.log("Criando a tabela, por favor aguarde...");
-                        setTimeout(function() {
-                            console.log('\x1b[32m%s\x1b[0m', "Tabela 'users' criada com sucesso.");
-                        }, 2000);
-                    }
-                });
+        con.query(tableCheckQuery, [process.env.DATABASE], function(err, result) {
+            if (err) {
+                console.error("Erro ao verificar a existência da tabela 'users':", err);
             } else {
-                //console.log("A tabela 'users' já existe.");
+                if (result[0]['COUNT(*)'] === 0) {
+                    // A tabela 'users' não existe, então a criamos
+                    con.query(createTableQuery, function(err, createResult) {
+                        if (err) {
+                            console.error("Erro ao criar a tabela 'users':", err);
+                        } else {
+                            console.log("Criando a tabela, por favor aguarde...");
+                            setTimeout(function() {
+                                console.log('\x1b[32m%s\x1b[0m', "Tabela 'users' criada com sucesso.");
+                            }, 2000);
+                        }
+                    });
+                } else {
+                    //console.log("A tabela 'users' já existe.");
+                }
             }
-        }
-    });
-
+        });
+    }
 });
 
 router.post('/', (req, res) => {
