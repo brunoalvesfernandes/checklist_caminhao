@@ -19,5 +19,5 @@ app.use('/login', authRoute);
 app.use('/checklist', checklistRoute);
 
 app.listen(process.env.PORT, () => {
-    console.log(`Servidor em execução em http://localhost:${process.env.PORT}`);
+    console.log(`Servidor em execução em ${process.env.WEBSITE}:${process.env.PORT}`);
 });
