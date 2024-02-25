@@ -1,0 +1,514 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    color: rgb(77, 77, 77);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    top: 0;
+    display: block;
+    flex-wrap: wrap;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 50px;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
+}
+
+.menu img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin-top: -9px;
+    cursor: pointer;
+}
+
+.menu img:hover {
+    background-color: rgb(0, 136, 255);
+}
+
+.menu h1 {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: -10px;
+}
+
+#logout {
+    bottom: 0;
+}
+
+.homeblock,
+.questionario {
+    margin-top: 120px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
+    display: none;
+}
+
+.questionario img {
+    width: 250px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.separador {
+    background-color: rgb(201, 201, 201);
+    height: 1px;
+    width: 100%;
+}
+
+.icon-camera {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.icon-camera:hover {
+    color: rgb(0, 0, 0);
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 200px;
+    height: auto;
+}
+
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.nav-link.active {
+    color: #fff;
+    background-color: #007bff;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.nav-pills .nav-link {
+    color: #495057;
+    border: 1px solid #dee2e6;
+}
+
+.tab-content > .active {
+    display: block;
+    visibility: visible;
+}
+
+.tab-pane {
+    pointer-events: none;
+    user-select: none;
+}
+
+.tab-pane.active {
+    display: block;
+    pointer-events:all;
+}
+.tab-pane.fade {
+    transition: opacity 0.15s linear;
+}
+.tab-pane.fade.show {
+    opacity: 1;
+}
+
+.form-control {
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.nav-item {
+    margin-bottom: 0;
+}
+
+/* Estilo quando o input está focado */
+.form-control:focus {
+    border-color: #007bff; /* Cor do foco - pode ser ajustada conforme necessário */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra do foco - pode ser ajustada conforme necessário */
+}
+
+/* Estilo para o fundo do modal */
+.modal {
+    background-color: rgba(0, 0, 0, 0.5); /* Adiciona um fundo semi-transparente */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 9999999;
+    color: #9c9c9c;
+}
+
+/* Estilo para o conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+    display: block;
+    flex-wrap: wrap;
+}
+
+/* Estilo para o cabeçalho do modal */
+.modal-header {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
+    padding: 15px;
+}
+
+.modal-title {
+    color: #333;
+    font-size: 18px;
+}
+
+/* Estilo para o corpo do modal */
+.modal-body {
+    padding: 15px;
+}
+
+/* Estilo para o rodapé do modal */
+.modal-footer {
+    background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 10px 10px;
+    padding: 15px;
+}
+
+/* Estilo para os botões do modal */
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+/* Estilo para os botões do modal quando hover */
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border: 1px solid #5a6268;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border: 1px solid #0056b3;
+}
+
+
+
+.center {
+    display: flex;
+    flex-direction: column;
+    /* Ajusta a direção do flex container para coluna */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    margin-top: -100px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 14px;
+    width: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+footer span {
+    float: inline-end;
+}
+
+footer a {
+    color: rgb(0, 0, 0);
+    margin-right: 15px;
+}
+
+footer a:hover {
+    color: rgb(0, 81, 255);
+
+}
+
+.btn-quest {
+    margin-bottom: 10px;
+}
+
+#add,
+.btn-quest button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#edit ,
+#del{
+    background-color: #383838;
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+}
+
+#add {
+    background-color: #be0000;
+    color: #333;
+}
+
+/* Efeito de hover */
+#add:hover,
+.btn-quest button:hover {
+    opacity: 0.8;
+    transition: background-color 0.3s ease;
+}
+
+#del:hover,
+#add:hover,
+#edit:hover {
+    background-color: #c7c7c7;
+}
+
+.menu_ {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: rgb(224, 224, 224);
+    z-index: 3;
+    font-size: 13px;
+}
+
+.menu_ ul {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+}
+
+.menu_ ul li {
+    padding-top: 15px;
+    height: 50px;
+    width: 80px;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.menu_ ul li:hover {
+    background-color: rgb(77, 77, 77);
+}
+
+.active {
+    background-color: rgb(77, 77, 77);
+}
+
+.menu-amburguer {
+    display: none;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.menu-amburguer i {
+    font-size: 25px;
+    color: #f5f5f5;
+}
+
+.confirm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 9999;
+    display: none;
+    height: 120px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: none;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+#questX {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 45px;
+}
+
+.editP {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 9999;
+    display: none;
+    /* Inicialmente oculto */
+    height: 250px;
+    width: 90%;
+}
+
+.btn-edit {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-del {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 500px) {
+    .menu h1 {
+        font-size: 15px;
+    }
+
+    .questionario {
+        margin-bottom: 50px;
+    }
+
+    .editP {
+        width: 100%;
+    }
+
+    .confirm {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .menu-amburguer {
+        display: block;
+    }
+
+    .menu_ {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        top: 0;
+        left: 0;
+        text-align: center;
+        display: none;
+    }
+
+    .menu_ ul {
+        display: block;
+        flex-wrap: none;
+        margin-top: 50px;
+    }
+
+    .menu_ ul li {
+        font-size: 25px;
+        color: #f5f5f5;
+        list-style-type: none;
+        width: 100%;
+        height: 50px;
+        margin-left: 0;
+        padding-top: 0;
+    }
+}

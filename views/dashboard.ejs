@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="icon" href="images/logo.png" sizes="32x32">
+</head>
+
+<body>
+    
+    <div class="container">
+        <section class="menu">
+            <img id="profile-img" src="<%= data.avatar %>" alt="perfil">
+            <input type="file" id="file-input" accept="image/*" style="display: none;">
+            <h1>CHECK LIST</h1>
+        </section>
+
+        <section class="center">
+            <div class="block">
+                <h1 class="inspecionado" style="margin-bottom: 20px;"></h1>
+                <img src="images/quiz.jpeg" alt="">
+                <h3>FROTA : <%= data.truck %></h3>
+                <div class="inspec">Você precisa fazer a inspeção diaria ! <%= data.firstName %></div>
+                <div class="inspection">NOVA INSPEÇÃO</div>
+                <div class="disconnect">DESCONECTAR</div>
+            </div>
+        </section>
+
+        <footer>
+            ©2024 TODOS DIREITOS RESERVADOS. <span>DEVELOPER <a href="#">BRUNO A</a></span>
+        </footer>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard - Painel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/dashboardadm.css">
+    <link rel="icon" href="images/logo.png" sizes="32x32">
+</head>
+
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+    </div>  
+    <div class="container">
+        <section class="menu">
+            <img id="profile-img" src="<%= data.avatar %>" alt="perfil">
+            <input type="file" id="file-input" accept="image/*" style="display: none;">
+
+            <h1>PAINEL ADMINISTRATIVO</h1>
+            <div class="menu_">
+                <ul>
+                    <li class="active" id="home">Home</li>
+                    <li id="quest">Questionario</li>
+                    <li id="users">Usuarios</li>
+                    <li id="problem">Manutenções</li>
+                    <li id="logout">Sair</li>
+                </ul>
+            </div>
+
+            <div class="menu-amburguer">
+                <i class="bi bi-list"></i>
+            </div>
+        </section>
+
+        <section class="center">
+            <div class="questionario"></div>
+            <div class="homeblock"></div>
+            <div class="usuarios"></div>
+            <div class="problems"></div>
+        </section>
+
+        <section class="confirm" id="confirm">
+            <h3>Você tem certeza que deseja fazer isso ?</h3>
+            <div class="btn-del">
+                <button id="yes">Sim</button>
+                <button id="no">Não</button>
+            </div>
+        </section>
+
+        <section class="editP" id="editP">
+            <div class="questA">A QUESTAO ESTARA AQUI PARA REPRESENTAR</div>
+            <input type="text" name="questX" id="questX" placeholder="Coloque a questão editada aqui !">
+            <div class="btn-edit">
+                <button id="save">Salvar</button>
+                <button id="cancel">Cancelar</button>
+            </div>
+        </section>
+        <div class="overlay" id="overlay"></div>
+
+        <footer>
+            ©2024 TODOS DIREITOS RESERVADOS. <span>DEVELOPER <a href="#">BRUNO A</a></span>
+        </footer>
+
+    </div>
+
+    <div id="inspec" style="display: none;" data-inspec="<%= inspec %>"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="js/questionario.js"></script>
+    <script src="js/homeblock.js"></script>
+    
+</body>
+
+</html>

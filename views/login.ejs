@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checklist</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Adicione as meta tags viewport para tornar a página responsiva -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/logo.png" sizes="32x32">
+</head>
+<body>
+    <div class="login-container">
+        <div class="container">
+            <img src="images/logo.png" alt="Logo">
+            <h1>Entrar</h1>
+            <form method="post" action="/login">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Entrar</button>
+
+                <% if (error == ''){ } else { %>
+                    <div class="error"><%= error %></div>
+                <% } %>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

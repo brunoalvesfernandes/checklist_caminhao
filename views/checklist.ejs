@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Caminhão</title>
+    <link rel="stylesheet" href="css/checklist.css">
+    <link rel="icon" href="images/favicon-32x32.jpg" sizes="32x32">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <div class="center">
+        <div class="block">
+            <input type="text" name="horimetro" id="horimetro" maxlength="15" pattern="[0-9]*" placeholder="HORÍMETRO">
+            <button id="sendall">Enviar</button>
+        </div>
+    </div>
+    <div class="checklist-container">
+        <div class="container">
+            <h1>Checklist</h1>
+            <img src="" alt="">
+            <h2></h2>
+            <div class="buttons">
+                <button id="yes">Sim</button>
+                <button id="no">Não</button>
+            </div>
+            
+        </div>
+    </div>
+    <div class="loading-container">
+        <div class="spinner"></div>
+    </div>    
+    <div class="camera" style="display:none">
+        <div id="toggleCameraButton"><i class="bi bi-arrow-down-up"></i></div>
+        <canvas id="canvas" width="1920" height="1080" style="display: none;"></canvas>
+        <video id="video" autoplay></video>
+        <button id="captureButton"></button>
+    </div>
+    
+    <img id="capturedPhoto" style="display: none;" src="" alt="Foto Capturada">
+
+    <div class="container">
+        <div class='checklist' id="motivos" data-quest="<%= data %>">
+            <ul>
+                <h1>RELATAR O PROBLEMA !</h1>
+                <form action="javascript:void(0);">
+                    <li>
+                        <textarea name="problema" id="problema" cols="30" rows="5"
+                            placeholder="Qual o problema ?"></textarea>
+                        <img id="capturedErro" style="display: none;" src="" alt="Foto Capturada">   
+                    </li>
+
+                    <li>
+                        <button id="capture">Tirar Foto</button>
+
+                    </li>
+                    <li> <button id="enviar-problemas">Enviar</button></li>
+                </form>
+            </ul>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <script src="js/checklist.js"></script>
+    <script src="js/picture.js"></script>
+</body>
+
+</html>
