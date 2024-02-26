@@ -27,9 +27,9 @@ Depois que o servidor estiver em execução, você pode acessar a aplicação em
 
 ## Capturas de Tela
 
-![Captura de Tela do Projeto]("capture/a.png")
-![Captura de Tela do Projeto]("capture/b.png")
-![Captura de Tela do Projeto]("capture/c.png")
+![Captura de Tela 1](capture/a.png)
+![Captura de Tela 2](capture/b.png)
+![Captura de Tela 3](capture/c.png)
 
 ## Licença
 
