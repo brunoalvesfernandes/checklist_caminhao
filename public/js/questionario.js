@@ -32,10 +32,10 @@ async function carregar() {
 
     }
 
-    let html = '<h1>PERGUNTAS</h1><div class="separador"></div>';
+    let html = '<h1>PERGUNTAS</h1><div class="separador"></div><div class="quest-container">';
     if (quest) {
         for (let index = 0; index < quest.length; index++) {
-            html += `<div>
+            html += `<div class="quest-cont">
                 <h5>NUMERO ${quest[index].id} </h5>
                 <div class="separador"></div></br>
                 <div class="image-container">
@@ -47,13 +47,13 @@ async function carregar() {
                     <button id="edit" onclick="editQuest(${quest[index].id})">EDITAR</button>
                     <button id="del" onclick="delQuest(${quest[index].id})">EXCLUIR</button>
                 </div>
-                <div class="separador"></div></div>
+                </div>
             `
         }
 
-        html += `<button id="add" onclick="addQuest(${quest.length + 1})">ADICIONAR</button>`;
+        html += `</div><button id="add" onclick="addQuest(${quest.length + 1})">ADICIONAR</button>`;
     } else {
-        html += `<button id="add" onclick="addQuest(1)">ADICIONAR</button>`;
+        html += `</div><button id="add" onclick="addQuest(1)">ADICIONAR</button>`;
     }
 
     $('.questionario').html(html)
@@ -239,7 +239,6 @@ async function editImg(id) {
 }
 
 async function addQuestModal(id) {
-    $('.loading-container').show();
     return new Promise((resolve, reject) => {
         const modal = createModal();
         modal.showQuest()
@@ -277,7 +276,6 @@ async function addQuestModal(id) {
 
         cancelButton.on('click', () => {
             modal.closeQuest();
-            $('.loading-container').hide();
             reject("Operação cancelada");
         });
         confirmButton.on('click', async () => {
@@ -293,7 +291,6 @@ async function addQuestModal(id) {
 
             if (imgSrc) {
                 modal.closeQuest(); // Close modal and return image source
-                $('.loading-container').hide();
                 resolve({
                     "id": id,
                     "img": imgSrc,
@@ -302,7 +299,6 @@ async function addQuestModal(id) {
             } else {
                 // Display error message
                 modal.closeQuest();
-                $('.loading-container').hide();
                 alert("Erro ao obter a imagem. Tente novamente.");
                 reject("Erro ao obter a imagem. Tente novamente.");
             }
@@ -572,9 +568,9 @@ async function delQuest(id) {
 }
 
 async function updateDisplay() {
-    let html = '<h1>PERGUNTAS</h1><div class="separador"></div>';
+    let html = '<h1>PERGUNTAS</h1><div class="separador"></div><div class="quest-container">';
     for (let index = 0; index < quest.length; index++) {
-        html += `<div>
+        html += `<div class="quest-cont">
             <h5>NUMERO ${quest[index].id} </h5>
             <div class="separador"></div></br>
             <div class="image-container">
@@ -586,10 +582,10 @@ async function updateDisplay() {
                 <button id="edit" onclick="editQuest(${quest[index].id})">EDITAR</button>
                 <button id="del" onclick="delQuest(${quest[index].id})">EXCLUIR</button>
             </div>
-            <div class="separador"></div></div>
+            </div>
         `;
     }
-    html += `<button id="add" onclick="addQuest(${quest.length + 1})">ADICIONAR</button>`;
+    html += `</div><button id="add" onclick="addQuest(${quest.length + 1})">ADICIONAR</button>`;
     $('.questionario').html(html);
 
     await updateBD();
