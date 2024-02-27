@@ -3,7 +3,7 @@ const inspecData = $('#inspec').data('inspec');
 const checkData = $('#check').data('check');
 let quest = []
 let active = false
-async function carregar(){
+async function carregar() {
     try {
         quest = await getQuest()
     } catch (error) {
@@ -29,12 +29,11 @@ async function carregar(){
                 }
             });
         });
-        
+
     }
 
-    $('.loading-container').hide();
     let html = '<h1>PERGUNTAS</h1><div class="separador"></div>';
-    if(quest){
+    if (quest) {
         for (let index = 0; index < quest.length; index++) {
             html += `<div>
                 <h5>NUMERO ${quest[index].id} </h5>
@@ -53,7 +52,7 @@ async function carregar(){
         }
 
         html += `<button id="add" onclick="addQuest(${quest.length + 1})">ADICIONAR</button>`;
-    }else {
+    } else {
         html += `<button id="add" onclick="addQuest(1)">ADICIONAR</button>`;
     }
 
@@ -76,7 +75,7 @@ async function carregar(){
         $('.questionario').show()
     })
 
-    $('#logout'). click(()=>{
+    $('#logout').click(() => {
         window.location.href = 'dashboard/logout';
     })
 
@@ -84,32 +83,47 @@ async function carregar(){
         $(".menu input").click();
     });
     
-    $(".menu input").change((event) => {
+    $(".menu input").change(async (event) => {
         const file = event.target.files[0];
         if (file) {
-            convertImageToBase64(file, function(base64data) {
-                // Envie a imagem
-                $.ajax({
-                    type: 'POST',
-                    url: '/checklist/updatePerfilImg',
-                    dataType: 'json',
-                    data: { foto: base64data },
-                    success: function(response) {
-                        if (response.error == false) {
-                            setTimeout(() => {
-                                window.location.href = '/dashboard';
-                            }, 1000);
-                        } else {
-                            console.log(response.error)
-                        }
-                    },
-                    error: function(result) {
-                        console.error('Erro ao enviar o arquivo:', result);
-                        // Trate o erro, se necessário
+            try {
+                const base64data = await convertImageToBase64(file)
+                try {
+                    const res = await updatePerfilImg(base64data);
+                    if (res) {
+                        setTimeout(() => {
+                            window.location.href = '/dashboard';
+                        }, 1000);
+                    } else {
+                        console.log(res)
                     }
-                });
-            });
+                } catch (error) {
+                    
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
+    });
+}
+
+function updatePerfilImg(base64data) {
+    $('.loading-container').show();
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'POST',
+            url: '/checklist/updatePerfilImg',
+            dataType: 'json',
+            data: { foto: base64data },
+            success: function (response) {
+                $('.loading-container').hide();
+                resolve(true);
+            },
+            error: function (error) {
+                $('.loading-container').hide();
+                reject(error);
+            }
+        });
     });
 }
 
@@ -161,12 +175,12 @@ function hideEdit() {
 async function addQuest(ultimo) {
     try {
         let data = await addQuestModal(ultimo);
-        if(data){
+        if (data) {
             quest.push(data);
             updateDisplay();
         }
     } catch (error) {
-        console.log("Error: "+ error)
+        console.log("Error: " + error)
     }
 }
 
@@ -179,7 +193,7 @@ async function editQuest(id) {
         if (index !== -1) {
             try {
                 let edit = await showEdit();
-                if(edit){
+                if (edit) {
                     quest[index].quest = edit;
                     updateDisplay();
                     hideEdit();
@@ -191,7 +205,7 @@ async function editQuest(id) {
                 $('.questA').html('');
                 $('#questX').val('');
             }
-            
+
         } else {
             console.error("Questão com ID não encontrada:", id);
         }
@@ -214,7 +228,7 @@ async function editImg(id) {
             } catch (error) {
                 console.log(error)
             }
-            
+
         } else {
             console.error("Questão com ID não encontrada:", id);
         }
@@ -225,6 +239,7 @@ async function editImg(id) {
 }
 
 async function addQuestModal(id) {
+    $('.loading-container').show();
     return new Promise((resolve, reject) => {
         const modal = createModal();
         modal.showQuest()
@@ -262,6 +277,7 @@ async function addQuestModal(id) {
 
         cancelButton.on('click', () => {
             modal.closeQuest();
+            $('.loading-container').hide();
             reject("Operação cancelada");
         });
         confirmButton.on('click', async () => {
@@ -277,6 +293,7 @@ async function addQuestModal(id) {
 
             if (imgSrc) {
                 modal.closeQuest(); // Close modal and return image source
+                $('.loading-container').hide();
                 resolve({
                     "id": id,
                     "img": imgSrc,
@@ -284,7 +301,8 @@ async function addQuestModal(id) {
                 });
             } else {
                 // Display error message
-                modal.closeQuest(); 
+                modal.closeQuest();
+                $('.loading-container').hide();
                 alert("Erro ao obter a imagem. Tente novamente.");
                 reject("Erro ao obter a imagem. Tente novamente.");
             }
@@ -347,7 +365,8 @@ async function showImageEditModal() {
                 resolve(imgSrc);
             } else {
                 // Display error message
-                modal.close(); 
+                modal.close();
+                $('.loading-container').hide();
                 alert("Erro ao obter a imagem. Tente novamente.");
                 reject("Erro ao obter a imagem. Tente novamente.");
             }
@@ -465,9 +484,9 @@ async function uploadImage(foto) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
 
-        reader.onload = function() {
-            convertImageToBase64(foto, function(base64data) {
-                // Envie a imagem
+        reader.onload = async function () {
+            try {
+                const base64data = await convertImageToBase64(foto)
                 $.ajax({
                     type: 'POST',
                     url: '/checklist/enviar-foto',
@@ -486,8 +505,9 @@ async function uploadImage(foto) {
                         reject('Erro na requisição AJAX'); // Rejeite a Promise com uma mensagem de erro
                     }
                 });
-            });
-            
+            } catch (error) {
+                console.log(error)
+            }
         };
 
         // Ler o arquivo como um URL de dados
@@ -495,31 +515,44 @@ async function uploadImage(foto) {
     });
 }
 
-// Função para converter uma imagem para base64
-function convertImageToBase64(file, callback) {
-    const reader = new FileReader();
 
-    reader.onload = function(event) {
-        const img = new Image();
+function convertImageToBase64(file) {
+    $('.loading-container').show();
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
 
-        img.onload = function() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
+        reader.onload = function (event) {
+            const img = new Image();
 
-            canvas.width = img.width;
-            canvas.height = img.height;
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
 
-            ctx.drawImage(img, 0, 0);
+                canvas.width = img.width;
+                canvas.height = img.height;
 
-            const base64data = canvas.toDataURL('image/jpeg');
+                ctx.drawImage(img, 0, 0);
 
-            callback(base64data);
+                const base64data = canvas.toDataURL('image/jpeg');
+                $('.loading-container').hide();
+                resolve(base64data);
+            };
+
+            img.onerror = function(error) {
+                $('.loading-container').hide();
+                reject(error);
+            };
+
+            img.src = event.target.result;
         };
 
-        img.src = event.target.result;
-    };
+        reader.onerror = function(error) {
+            $('.loading-container').hide();
+            reject(error);
+        };
 
-    reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+    });
 }
 
 async function delQuest(id) {
